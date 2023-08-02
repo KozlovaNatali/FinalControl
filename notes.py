@@ -18,7 +18,7 @@ def read_notes(filename, start_date=None, end_date=None):
         for row in reader:
             note = {'id': row[0], 'title': row[1], 'body': row[2], 'timestamp': row[3]}
             if start_date and end_date:
-                note_date = datetime.strptime(note['timestamp'], "%Y-%m-%d %H:%M:%S.%f")
+                note_date = datetime.strptime(note['timestamp'], "%Y-%m-%d %H:%M:%S.%f").date()
                 if start_date <= note_date <= end_date:
                     notes.append(note)
             else:
