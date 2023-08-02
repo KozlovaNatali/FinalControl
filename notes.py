@@ -10,13 +10,18 @@ def save_note(note, filename):
         writer = csv.writer(file, delimiter=';')
         writer.writerow([note['id'], note['title'], note['body'], note['timestamp']])
 
-def read_notes(filename):
+def read_notes(filename, start_date=None, end_date=None):
     notes = []
-    with open(filename, 'r', encoding='utf-8') as file:
+    with open(filename, 'r') as file:
         reader = csv.reader(file, delimiter=';')
         for row in reader:
             note = {'id': row[0], 'title': row[1], 'body': row[2], 'timestamp': row[3]}
-            notes.append(note)
+            if start_date and end_date:
+                note_date = datetime.strptime(note['timestamp'], "%Y-%m-%d %H:%M:%S.%f")
+                if start_date &lt != note_date &lt != end_date:
+                    notes.append(note)
+            else:
+                notes.append(note)
     return notes
 
 def edit_note(note_id, title, body, filename):

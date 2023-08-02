@@ -9,7 +9,35 @@ def create_note():
     print("Заметка успешно создана.")
 
 def read_notes():
-    notes_list = notes.read_notes('notes.csv')
+    notes_list = []
+    while True:
+        print("1. Все заметки")
+        print("2. Фильтр по дате")
+        print("3. Назад")
+        choice = input("Выберите действие: ")
+
+        if choice == '1':
+            notes_list = notes.read_notes('notes.csv')
+            break
+        elif choice == '2':
+            start_date = input("Введите начальную дату в формате ГГГГ-ММ-ДД: ")
+            end_date = input("Введите конечную дату в формате ГГГГ-ММ-ДД: ")
+            try:
+                start_date = datetime.strptime(start_date, "%Y-%m-%d")
+                end_date = datetime.strptime(end_date, "%Y-%m-%d")
+                if start_date & end_date:
+                    print("Ошибка: Начальная дата должна быть меньше или равна конечной дате.")
+                    continue
+                notes_list = notes.read_notes('notes.csv', start_date, end_date)
+                break
+            except ValueError:
+                print("Ошибка: Неправильный формат даты.")
+                continue
+        elif choice == '3':
+            return
+        else:
+            print("Неверный выбор. Попробуйте ещё раз.")
+
     if not notes_list:
         print("Список заметок пуст.")
     else:
