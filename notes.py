@@ -1,5 +1,6 @@
 import csv
 from datetime import datetime
+from operator import lt
 
 def create_note(note_id, title, body):
     note = {'id': note_id, 'title': title, 'body': body, 'timestamp': str(datetime.now())}
@@ -12,13 +13,13 @@ def save_note(note, filename):
 
 def read_notes(filename, start_date=None, end_date=None):
     notes = []
-    with open(filename, 'r') as file:
+    with open(filename, 'r', encoding='utf-8') as file:
         reader = csv.reader(file, delimiter=';')
         for row in reader:
             note = {'id': row[0], 'title': row[1], 'body': row[2], 'timestamp': row[3]}
             if start_date and end_date:
                 note_date = datetime.strptime(note['timestamp'], "%Y-%m-%d %H:%M:%S.%f")
-                if start_date &lt != note_date &lt != end_date:
+                if start_date <= note_date >= end_date:
                     notes.append(note)
             else:
                 notes.append(note)
