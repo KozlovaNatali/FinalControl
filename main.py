@@ -1,4 +1,5 @@
 import notes
+from datetime import datetime
 
 def create_note():
     note_id = input("Введите идентификатор заметки: ")
@@ -25,7 +26,7 @@ def read_notes():
             try:
                 start_date = datetime.strptime(start_date, "%Y-%m-%d")
                 end_date = datetime.strptime(end_date, "%Y-%m-%d")
-                if start_date & end_date:
+                if start_date > end_date:
                     print("Ошибка: Начальная дата должна быть меньше или равна конечной дате.")
                     continue
                 notes_list = notes.read_notes('notes.csv', start_date, end_date)
