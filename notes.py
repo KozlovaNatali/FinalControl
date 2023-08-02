@@ -6,13 +6,13 @@ def create_note(note_id, title, body):
     return note
 
 def save_note(note, filename):
-    with open(filename, 'a', newline='') as file:
+    with open(filename, 'a', newline='', encoding='utf-8') as file:
         writer = csv.writer(file, delimiter=';')
         writer.writerow([note['id'], note['title'], note['body'], note['timestamp']])
 
 def read_notes(filename):
     notes = []
-    with open(filename, 'r') as file:
+    with open(filename, 'r', encoding='utf-8') as file:
         reader = csv.reader(file, delimiter=';')
         for row in reader:
             note = {'id': row[0], 'title': row[1], 'body': row[2], 'timestamp': row[3]}
@@ -35,7 +35,7 @@ def delete_note(note_id, filename):
     write_notes(notes, filename)
 
 def write_notes(notes, filename):
-    with open(filename, 'w', newline='') as file:
+    with open(filename, 'w', newline='', encoding='utf-8') as file:
         writer = csv.writer(file, delimiter=';')
         for note in notes:
             writer.writerow([note['id'], note['title'], note['body'], note['timestamp']])
