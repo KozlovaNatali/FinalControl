@@ -29,8 +29,8 @@ def read_notes():
                 if start_date > end_date:
                     print("Ошибка: Начальная дата должна быть меньше или равна конечной дате.")
                     continue
-                start_date = start_date.strftime("%Y-%m-%d")
-                end_date = end_date.strftime("%Y-%m-%d")
+                # start_date = start_date.strftime("%Y-%m-%d")
+                # end_date = end_date.strftime("%Y-%m-%d")
                 notes_list = notes.read_notes('notes.csv', start_date, end_date)
                 break
             except ValueError:
